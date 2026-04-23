@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tornillos del Sur - Ferretería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="#" class="header__logo">
+        <img src="Logo_tornillos_del_sur.png" alt="Tornillos del Sur" class="logo-img">
+        <span class="logo-text">Tornillos<br><strong>del Sur</strong></span>
+      </a>
+      <div class="header__search">
+        <div class="header__search-category">
+          <span>Todas las categorías</span>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#001231" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="header__search-divider"></div>
+        <input type="text" placeholder="¿Qué estás buscando hoy?" class="header__search-input">
+        <button class="header__search-btn" aria-label="Buscar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <div class="header__contact">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <div>
+          <span class="header__phone">+52 844 211 1493</span>
+          <span class="header__phone-label">Llámanos</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <button class="nav__categories-btn">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><rect width="18" height="2" rx="1" fill="#001530"/><rect y="6" width="18" height="2" rx="1" fill="#001530"/><rect y="12" width="18" height="2" rx="1" fill="#001530"/></svg>
+        <span>Categorías</span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="#" class="nav__link nav__link--active">Inicio</a></li>
+        <li><a href="seguridad-industrial.html" class="nav__link">Seguridad Industrial</a></li>
+        <li><a href="#catalogo" class="nav__link">Fijaciones Mecánicas</a></li>
+        <li><a href="#catalogo" class="nav__link">Herramientas</a></li>
+        <li><a href="#catalogo" class="nav__link">Abrasivos</a></li>
+        <li><a href="#catalogo" class="nav__link">Químicos</a></li>
+        <li><a href="#catalogo" class="nav__link">Soldadura</a></li>
+        <li><a href="#catalogo" class="nav__link">Mangueras</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero__content">
+      <span class="hero__subtitle">Bienvenido a</span>
+      <h1 class="hero__title">La mejor<br>ferretería<br><span>del sur</span></h1>
+      <p class="hero__desc">Todo lo que necesitas para tus proyectos de construcción, hogar y jardín.</p>
+      <a href="#catalogo" class="hero__cta">Ver Catálogo</a>
+    </div>
+    <div class="hero__image">
+      <img src="local.jpg" alt="Tornillos del Sur - Nuestro local">
+    </div>
+  </section>
+
+  <!-- Features Bar -->
+  <section class="features">
+    <div class="features__inner">
+      <div class="feature">
+        <div class="feature__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001530" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><polyline points="16 8 20 8 23 11 23 16 20 16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="feature__text">
+          <h3>Servicio de Entrega</h3>
+          <p>Te llevamos lo que necesitas a la puerta de tu hogar.</p>
+        </div>
+      </div>
+      <div class="feature__divider"></div>
+      <div class="feature">
+        <div class="feature__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001530" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="feature__text">
+          <h3>Asesor en Línea</h3>
+          <p>¿Alguna duda? Estamos encantados de atenderte.</p>
+        </div>
+      </div>
+      <div class="feature__divider"></div>
+      <div class="feature">
+        <div class="feature__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001530" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feature__text">
+          <h3>Calidad Garantizada</h3>
+          <p>Productos de las mejores marcas del mercado.</p>
+        </div>
+      </div>
+      <div class="feature__divider"></div>
+      <div class="feature">
+        <div class="feature__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001530" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        </div>
+        <div class="feature__text">
+          <h3>Gran Portafolio</h3>
+          <p>Tenemos todo lo que necesitas para tus proyectos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Professions / Categories Icons -->
+  <section class="professions">
+    <div class="professions__inner">
+      <div class="profession">
+        <div class="profession__icon">🌾</div>
+        <span>Agrónomo</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">🚜</div>
+        <span>Agricultor</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">⛏️</div>
+        <span>Minero</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">🔧</div>
+        <span>Mecánico</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">⚡</div>
+        <span>Soldador</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">🔨</div>
+        <span>Pulidor</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">🏗️</div>
+        <span>Operativo</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">🪚</div>
+        <span>Carpintero</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">🧱</div>
+        <span>Albañil</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">🎨</div>
+        <span>Pintor</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">👷</div>
+        <span>Obrero</span>
+      </div>
+      <div class="profession">
+        <div class="profession__icon">🌿</div>
+        <span>Jardinero</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Promo Banner -->
+  <section class="promo-banner">
+    <div class="promo-banner__inner">
+      <div class="promo-banner__content">
+        <span class="promo-banner__discount">40%</span>
+        <h2 class="promo-banner__title">Sierras Eléctricas</h2>
+        <p class="promo-banner__subtitle">Descuento en toda la línea</p>
+        <a href="#contacto" class="promo-banner__cta">Consultar</a>
+      </div>
+      <div class="promo-banner__image">
+        <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=500&q=80" alt="Sierra eléctrica">
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section - Lo mejor de la semana -->
+  <section class="products" id="catalogo">
+    <div class="products__inner">
+      <div class="products__header">
+        <h2 class="products__title">Lo mejor de la semana</h2>
+        <div class="products__tabs">
+          <button class="products__tab products__tab--active">Destacados</button>
+          <button class="products__tab">Mejor calificados</button>
+          <button class="products__tab">Nuevos</button>
+        </div>
+      </div>
+      <div class="products__grid">
+        <div class="product-card">
+          <span class="product-card__category">Herramientas</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1586864387789-628af9feed72?w=300&q=80" alt="Taladro inalámbrico">
+          </div>
+          <h3 class="product-card__name">Taladro Inalámbrico 20V</h3>
+          <span class="product-card__price">$85.000</span>
+        </div>
+        <div class="product-card">
+          <span class="product-card__category">Herramientas</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=300&q=80" alt="Set de herramientas">
+          </div>
+          <h3 class="product-card__name">Set Herramientas Profesional</h3>
+          <span class="product-card__price">$120.000</span>
+        </div>
+        <div class="product-card">
+          <span class="product-card__category">Seguridad</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1611329532992-0b7ba27d85fb?w=300&q=80" alt="Casco de seguridad">
+          </div>
+          <h3 class="product-card__name">Casco Seguridad Industrial</h3>
+          <span class="product-card__price">$15.000</span>
+        </div>
+        <div class="product-card">
+          <span class="product-card__category">Fijaciones</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=300&q=80" alt="Tornillos variados">
+          </div>
+          <h3 class="product-card__name">Kit Tornillos Variados 500pz</h3>
+          <span class="product-card__price">$12.000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Side-by-side promo + popular -->
+  <section class="dual-section">
+    <div class="dual-section__inner">
+      <!-- Popular Products (sidebar) -->
+      <div class="popular">
+        <div class="popular__header">
+          <h2 class="popular__title">Más visitados</h2>
+        </div>
+        <div class="popular__list">
+          <div class="popular__item">
+            <div class="popular__item-img">
+              <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=150&q=80" alt="Producto popular">
+            </div>
+            <div class="popular__item-info">
+              <span class="popular__item-category">Herramientas Eléctricas</span>
+              <h4 class="popular__item-name">Sierra Circular 7"</h4>
+              <span class="popular__item-price">$95.000</span>
+            </div>
+          </div>
+          <div class="popular__item">
+            <div class="popular__item-img">
+              <img src="https://images.unsplash.com/photo-1586864387789-628af9feed72?w=150&q=80" alt="Producto popular">
+            </div>
+            <div class="popular__item-info">
+              <span class="popular__item-category">Herramientas Manuales</span>
+              <h4 class="popular__item-name">Juego de Llaves Allen</h4>
+              <span class="popular__item-price">$18.000</span>
+            </div>
+          </div>
+          <div class="popular__item">
+            <div class="popular__item-img">
+              <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=150&q=80" alt="Producto popular">
+            </div>
+            <div class="popular__item-info">
+              <span class="popular__item-category">Fijaciones</span>
+              <h4 class="popular__item-name">Anclajes de Expansión</h4>
+              <span class="popular__item-price">$8.500</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flash deals -->
+      <div class="flash-deal">
+        <div class="flash-deal__header">
+          <h2 class="flash-deal__title">Ofertas destacadas</h2>
+        </div>
+        <div class="flash-deal__content">
+          <div class="flash-deal__image">
+            <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" alt="Oferta destacada">
+          </div>
+          <div class="flash-deal__info">
+            <span class="flash-deal__category">Herramientas</span>
+            <h3 class="flash-deal__name">Maletín Ultra Herramientas</h3>
+            <p class="flash-deal__desc">Ten tus herramientas siempre a mano, mantén tu espacio de trabajo organizado y llévalo a cualquier lugar.</p>
+            <div class="flash-deal__pricing">
+              <span class="flash-deal__price">$120.000</span>
+              <span class="flash-deal__badge">Consultar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mini promo cards -->
+  <section class="mini-promos">
+    <div class="mini-promos__inner">
+      <div class="mini-promo">
+        <div class="mini-promo__info">
+          <span class="mini-promo__discount">15%</span>
+          <h3 class="mini-promo__title">Martillos</h3>
+        </div>
+        <div class="mini-promo__img">
+          <img src="https://images.unsplash.com/photo-1586864387789-628af9feed72?w=200&q=80" alt="Martillos">
+        </div>
+      </div>
+      <div class="mini-promo">
+        <div class="mini-promo__info">
+          <span class="mini-promo__discount">35%</span>
+          <h3 class="mini-promo__title">Tornillos</h3>
+        </div>
+        <div class="mini-promo__img">
+          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=200&q=80" alt="Tornillos">
+        </div>
+      </div>
+      <div class="mini-promo">
+        <div class="mini-promo__info">
+          <span class="mini-promo__discount">25%</span>
+          <h3 class="mini-promo__title">Linternas</h3>
+        </div>
+        <div class="mini-promo__img">
+          <img src="https://images.unsplash.com/photo-1611329532992-0b7ba27d85fb?w=200&q=80" alt="Linternas">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ciber Ofertas Section -->
+  <section class="products products--alt">
+    <div class="products__inner">
+      <div class="products__header">
+        <h2 class="products__title">Ciber ofertas</h2>
+        <div class="products__tabs">
+          <button class="products__tab products__tab--active">Destornillador</button>
+          <button class="products__tab">Cascos</button>
+          <button class="products__tab">Guantes</button>
+        </div>
+      </div>
+      <div class="products__grid">
+        <div class="product-card">
+          <span class="product-card__category">Herramientas</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1586864387789-628af9feed72?w=300&q=80" alt="Destornillador">
+          </div>
+          <h3 class="product-card__name">Destornillador Eléctrico</h3>
+          <span class="product-card__price">$45.000</span>
+        </div>
+        <div class="product-card">
+          <span class="product-card__category">Seguridad</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1611329532992-0b7ba27d85fb?w=300&q=80" alt="Guantes">
+          </div>
+          <h3 class="product-card__name">Guantes de Trabajo Reforzados</h3>
+          <span class="product-card__price">$8.000</span>
+        </div>
+        <div class="product-card">
+          <span class="product-card__category">Seguridad</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=300&q=80" alt="Casco">
+          </div>
+          <h3 class="product-card__name">Casco con Visor Integrado</h3>
+          <span class="product-card__price">$22.000</span>
+        </div>
+        <div class="product-card">
+          <span class="product-card__category">Herramientas</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=300&q=80" alt="Set destornilladores">
+          </div>
+          <h3 class="product-card__name">Set Destornilladores 12pz</h3>
+          <span class="product-card__price">$15.000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Big Promo Banner -->
+  <section class="big-promo">
+    <div class="big-promo__inner">
+      <div class="big-promo__image">
+        <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=500&q=80" alt="Caladora">
+      </div>
+      <div class="big-promo__content">
+        <span class="big-promo__tag">Solo hoy, <strong>50%</strong></span>
+        <h2 class="big-promo__title">Caladora</h2>
+        <span class="big-promo__price">$300.000</span>
+        <a href="#contacto" class="big-promo__cta">Consultar disponibilidad</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Garden Section -->
+  <section class="products">
+    <div class="products__inner">
+      <div class="products__header">
+        <h2 class="products__title">Todo para tu jardín</h2>
+      </div>
+      <div class="products__grid">
+        <div class="product-card">
+          <span class="product-card__category">Jardín</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=80" alt="Manguera">
+          </div>
+          <h3 class="product-card__name">Manguera Extensible 15m</h3>
+          <span class="product-card__price">$25.000</span>
+        </div>
+        <div class="product-card">
+          <span class="product-card__category">Jardín</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=300&q=80" alt="Podadora">
+          </div>
+          <h3 class="product-card__name">Podadora de Césped</h3>
+          <span class="product-card__price">$180.000</span>
+        </div>
+        <div class="product-card">
+          <span class="product-card__category">Jardín</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=80" alt="Set jardín">
+          </div>
+          <h3 class="product-card__name">Set Herramientas Jardín</h3>
+          <span class="product-card__price">$32.000</span>
+        </div>
+        <div class="product-card">
+          <span class="product-card__category">Jardín</span>
+          <div class="product-card__image">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=300&q=80" alt="Tijeras podar">
+          </div>
+          <h3 class="product-card__name">Tijeras de Podar Profesional</h3>
+          <span class="product-card__price">$14.000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="newsletter__inner">
+      <div class="newsletter__content">
+        <span class="newsletter__label">Te notificamos</span>
+        <h2 class="newsletter__title">Promociones</h2>
+        <p class="newsletter__desc">Suscríbete y recibe nuestras ofertas y novedades directamente en tu correo.</p>
+        <form class="newsletter__form" onsubmit="return false;">
+          <input type="email" placeholder="Correo Electrónico" class="newsletter__input">
+          <button type="submit" class="newsletter__btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+      </div>
+      <div class="newsletter__image">
+        <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" alt="Promociones">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contacto">
+    <div class="footer__top">
+      <div class="footer__inner">
+        <div class="footer__contact-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f1ac2b" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <div>
+            <span class="footer__contact-value">+52 844 211 1493</span>
+            <span class="footer__contact-label">Soporte en línea gratis</span>
+          </div>
+        </div>
+        <div class="footer__contact-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f1ac2b" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div>
+            <span class="footer__contact-value">hola@tornillosdelsur.cl</span>
+            <span class="footer__contact-label">Escríbenos</span>
+          </div>
+        </div>
+        <div class="footer__contact-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f1ac2b" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div>
+            <span class="footer__contact-value">Lun - Vie / 8:00 - 18:00</span>
+            <span class="footer__contact-label">Días de trabajo / Horas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__divider"></div>
+    <div class="footer__bottom">
+      <div class="footer__inner">
+        <div class="footer__info">
+          <div class="footer__logo">
+            <img src="Logo_tornillos_del_sur.png" alt="Tornillos del Sur" class="logo-img logo-img--footer">
+            <span class="logo-text logo-text--light">Tornillos<br><strong>del Sur</strong></span>
+          </div>
+          <p class="footer__desc">Somos una ferretería encantados de atenderte y brindarte la mejor experiencia. Pregunta por nuestros descuentos y catálogo completo.</p>
+        </div>
+        <div class="footer__links-group">
+          <h4 class="footer__links-title">Encuentra rápido</h4>
+          <ul class="footer__links">
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="#catalogo">Novedades</a></li>
+          </ul>
+        </div>
+        <div class="footer__links-group">
+          <h4 class="footer__links-title">Categorías</h4>
+          <ul class="footer__links">
+            <li><a href="#catalogo">Herramientas</a></li>
+            <li><a href="#catalogo">Seguridad Industrial</a></li>
+            <li><a href="#catalogo">Jardín</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      <p>&copy; 2026 Tornillos del Sur. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp floating button -->
+  <a href="https://wa.me/528442111493?text=Hola%2C%20quiero%20consultar%20sobre%20un%20producto" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
