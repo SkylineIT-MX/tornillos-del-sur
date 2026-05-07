@@ -1,0 +1,175 @@
+{% extends "tienda/base.html" %}
+{% load static iconos %}
+
+{% block nav_inicio %}nav__link--active{% endblock %}
+
+{% block content %}
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero__content">
+      <span class="hero__subtitle">Bienvenido a</span>
+      <h1 class="hero__title">La mejor<br>ferretería<br><span>del sur</span></h1>
+      <p class="hero__desc">Todo lo que necesitas para tus proyectos de construcción, hogar y jardín.</p>
+      <a href="#catalogo" class="hero__cta">Ver Catálogo</a>
+    </div>
+    <div class="hero__image">
+      <img src="{% static 'tienda/images/local.jpg' %}" alt="Tornillos del Sur - Nuestro local">
+    </div>
+  </section>
+
+  <!-- Features Bar -->
+  <section class="features">
+    <div class="features__inner">
+      <div class="feature">
+        <div class="feature__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001530" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><polyline points="16 8 20 8 23 11 23 16 20 16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="feature__text">
+          <h3>Servicio de Entrega</h3>
+          <p>Te llevamos lo que necesitas a la puerta de tu hogar.</p>
+        </div>
+      </div>
+      <div class="feature__divider"></div>
+      <div class="feature">
+        <div class="feature__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001530" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="feature__text">
+          <h3>Asesor en Línea</h3>
+          <p>¿Alguna duda? Estamos encantados de atenderte.</p>
+        </div>
+      </div>
+      <div class="feature__divider"></div>
+      <div class="feature">
+        <div class="feature__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001530" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feature__text">
+          <h3>Calidad Garantizada</h3>
+          <p>Productos de las mejores marcas del mercado.</p>
+        </div>
+      </div>
+      <div class="feature__divider"></div>
+      <div class="feature">
+        <div class="feature__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001530" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        </div>
+        <div class="feature__text">
+          <h3>Gran Portafolio</h3>
+          <p>Tenemos todo lo que necesitas para tus proyectos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías del catálogo -->
+  <section class="professions">
+    <button class="professions__arrow professions__arrow--left" aria-label="Anterior">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="professions__inner">
+      {% for cat in categorias %}
+      <a href="{% url 'tienda:categoria' cat.slug %}" class="profession" style="text-decoration:none;">
+        <div class="profession__icon">{% icono cat.icono size=44 color="#001530" %}</div>
+        <span>{{ cat.nombre }}</span>
+      </a>
+      {% endfor %}
+    </div>
+    <button class="professions__arrow professions__arrow--right" aria-label="Siguiente">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </section>
+
+  <!-- Promo Banner -->
+  <section class="big-promo">
+    <div class="big-promo__inner">
+      <div class="big-promo__image" style="background:linear-gradient(135deg,#001530,#002a5c);display:flex;align-items:center;justify-content:center;">
+        {% icono "tornillo" size=80 color="#f1ac2b" %}
+      </div>
+      <div class="big-promo__content">
+        <span class="big-promo__tag">Catálogo completo</span>
+        <h2 class="big-promo__title" style="font-size:2.5rem;">179+ Productos</h2>
+        <span class="big-promo__price">12 Categorías &bull; 26 Subcategorías</span>
+        <a href="{% url 'tienda:catalogo' %}" class="big-promo__cta">Explorar catálogo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Productos Destacados -->
+  <section class="products" id="catalogo">
+    <div class="products__inner">
+      <div class="products__header">
+        <h2 class="products__title">Productos Destacados</h2>
+        <div class="products__tabs">
+          <a href="{% url 'tienda:catalogo' %}" class="products__tab products__tab--active" style="text-decoration:none;">Ver catálogo completo</a>
+        </div>
+      </div>
+      <div class="products__grid">
+        {% for producto in destacados %}
+        <a href="{% url 'tienda:producto' producto.codigo %}" class="product-card" style="text-decoration:none;">
+          <span class="product-card__category">{{ producto.subcategoria.categoria.nombre }}</span>
+          <div class="product-card__image" style="background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;">
+            {% icono producto.subcategoria.categoria.icono size=48 color="#001530" %}
+          </div>
+          <h3 class="product-card__name">{{ producto.nombre }}</h3>
+          <span class="product-card__price">{{ producto.codigo }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías Mini Cards -->
+  <section class="mini-promos">
+    <div class="mini-promos__inner">
+      {% for cat in categorias|slice:":3" %}
+      <a href="{% url 'tienda:categoria' cat.slug %}" class="mini-promo" style="text-decoration:none;">
+        <div class="mini-promo__info">
+          <span class="mini-promo__discount" style="font-size:2rem;">{% icono cat.icono size=36 color="#f1ac2b" %}</span>
+          <h3 class="mini-promo__title" style="font-size:1.1rem;">{{ cat.nombre }}</h3>
+        </div>
+        <div class="mini-promo__img" style="background:var(--color-bg);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:0.7rem;color:var(--color-text-muted);">{{ cat.subcategorias.count }} subcategorías</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Promo Banner Mayoristas -->
+  <section class="big-promo">
+    <div class="big-promo__inner">
+      <div class="big-promo__image" style="background:linear-gradient(135deg,#001530,#002a5c);display:flex;align-items:center;justify-content:center;">
+        {% icono "estructural" size=80 color="#f1ac2b" %}
+      </div>
+      <div class="big-promo__content">
+        <span class="big-promo__tag">Ventas por volumen</span>
+        <h2 class="big-promo__title" style="font-size:2.5rem;">Mayoristas</h2>
+        <span class="big-promo__price">Precios especiales para constructoras, talleres e industria</span>
+        <a href="https://wa.me/528442111493?text=Hola%2C%20me%20interesa%20una%20cotización%20por%20mayoreo" class="big-promo__cta" target="_blank" rel="noopener">Solicitar cotización</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Más categorías -->
+  <section class="products">
+    <div class="products__inner">
+      <div class="products__header">
+        <h2 class="products__title">Explora nuestras categorías</h2>
+      </div>
+      <div class="products__grid">
+        {% for cat in categorias|slice:"3:" %}
+        <a href="{% url 'tienda:categoria' cat.slug %}" class="product-card" style="text-decoration:none;">
+          <span class="product-card__category">{{ cat.subcategorias.count }} subcategorías</span>
+          <div class="product-card__image" style="background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;">
+            {% icono cat.icono size=48 color="#001530" %}
+          </div>
+          <h3 class="product-card__name">{{ cat.nombre }}</h3>
+          <span class="product-card__price" style="font-size:0.8rem;color:var(--color-text-light);">{{ cat.descripcion|truncatewords:10 }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

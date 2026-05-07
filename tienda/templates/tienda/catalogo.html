@@ -1,0 +1,43 @@
+{% extends "tienda/base.html" %}
+{% load static iconos %}
+
+{% block title %}Catálogo - Tornillos del Sur{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'tienda/css/category.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="cat-products">
+  <div class="cat-products__inner">
+    <div class="cat-products__header">
+      <div class="cat-products__breadcrumb">
+        <h2>Catálogo Completo</h2>
+        <span class="cat-products__breadcrumb-trail">
+          {{ total_productos }} productos en {{ categorias|length }} categorías
+        </span>
+      </div>
+    </div>
+
+    <div class="cat-subcategories__grid" style="margin-top:1.5rem;">
+      {% for categoria in categorias %}
+      <div class="cat-subcat">
+        <h3 class="cat-subcat__title" style="font-size:1rem;">
+          {% icono categoria.icono size=18 color="#001530" %} <a href="{% url 'tienda:categoria' categoria.slug %}" style="color:var(--color-primary);">{{ categoria.nombre }}</a>
+        </h3>
+        <p style="font-size:0.8rem;color:var(--color-text-light);margin-bottom:0.75rem;">{{ categoria.descripcion|truncatewords:20 }}</p>
+        <ul class="cat-subcat__list">
+          {% for sub in categoria.subcategorias.all %}
+          <li>
+            <a href="{% url 'tienda:subcategoria' categoria.slug sub.slug %}">
+              {{ sub.nombre }} ({{ sub.productos.count }})
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

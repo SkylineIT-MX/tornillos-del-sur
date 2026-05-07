@@ -1,0 +1,68 @@
+{% extends "tienda/base.html" %}
+{% load static iconos %}
+
+{% block title %}{{ categoria.nombre }} - Tornillos del Sur{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'tienda/css/category.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Category Hero -->
+<section class="cat-hero">
+  <div class="cat-hero__inner" style="grid-template-columns:1fr;">
+    <div class="cat-hero__main">
+      <div class="cat-hero__main-content">
+        <span class="cat-hero__main-label" style="display:flex;align-items:center;gap:0.75rem;">{% icono categoria.icono size=40 color="#f1ac2b" %} {{ categoria.nombre }}</span>
+        <h1 class="cat-hero__main-title" style="color:#fff; font-size:1.5rem; margin-top:1rem;">{{ categoria.descripcion }}</h1>
+      </div>
+    </div>
+  </div>
+  <!-- Sub-banners -->
+  <div class="cat-hero__subs">
+    {% for sub in categoria.subcategorias.all %}
+    <a href="{% url 'tienda:subcategoria' categoria.slug sub.slug %}" class="cat-hero__sub" style="text-decoration:none;">
+      <h3 class="cat-hero__sub-title" style="font-size:1rem;">{{ sub.nombre }}</h3>
+      <span style="font-size:0.8rem;color:var(--color-text-muted);">{{ sub.productos.count }} productos</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Product Grid -->
+<section class="cat-products">
+  <div class="cat-products__inner">
+    <div class="cat-products__header">
+      <div class="cat-products__breadcrumb">
+        <h2>{{ categoria.nombre }}</h2>
+        <span class="cat-products__breadcrumb-trail">
+          <a href="{% url 'tienda:index' %}">Inicio</a> &rsaquo;
+          <a href="{% url 'tienda:catalogo' %}">Catálogo</a> &rsaquo;
+          {{ categoria.nombre }}
+        </span>
+      </div>
+    </div>
+
+    <div class="cat-products__grid">
+      {% for producto in productos %}
+      <a href="{% url 'tienda:producto' producto.codigo %}" class="cat-product-card" style="text-decoration:none;">
+        <span class="cat-product-card__brand">{{ producto.codigo }}</span>
+        <div class="cat-product-card__image" style="height:80px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;">
+          {% icono categoria.icono size=36 color="#001530" %}
+        </div>
+        <span class="cat-product-card__subcategory">{{ producto.subcategoria.nombre }}</span>
+        <h3 class="cat-product-card__name">{{ producto.nombre }}</h3>
+        <div class="cat-product-card__pricing">
+          {% if producto.material %}
+          <span style="font-size:0.7rem;background:var(--color-bg);padding:0.2rem 0.5rem;border-radius:3px;color:var(--color-text-light);">{{ producto.get_material_display }}</span>
+          {% endif %}
+          {% if producto.acabado %}
+          <span style="font-size:0.7rem;background:var(--color-bg);padding:0.2rem 0.5rem;border-radius:3px;color:var(--color-text-light);">{{ producto.get_acabado_display }}</span>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
