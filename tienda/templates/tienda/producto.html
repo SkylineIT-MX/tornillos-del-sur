@@ -5,6 +5,50 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'tienda/css/category.css' %}">
+<style>
+  .producto-detalle__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 2rem;
+    margin-top: 1.5rem;
+    align-items: start;
+  }
+  .producto-detalle__media {
+    background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+    padding: 1rem;
+  }
+  .producto-detalle__media img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .producto-detalle__codigo-chip {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    background: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+  }
+  @media (max-width: 720px) {
+    .producto-detalle__grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .producto-detalle__media {
+      aspect-ratio: auto;
+      min-height: 240px;
+      max-height: 320px;
+    }
+  }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -25,14 +69,14 @@
     </div>
 
     <!-- Product detail -->
-    <div style="display:grid;grid-template-columns:1fr 2fr;gap:2rem;margin-top:1.5rem;">
+    <div class="producto-detalle__grid">
       <!-- Image -->
-      <div style="background:linear-gradient(135deg,#f0f0f0,#e8e8e8);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:300px;flex-direction:column;gap:1rem;overflow:hidden;">
+      <div class="producto-detalle__media">
         {% if producto.imagen %}
-        <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" style="max-width:100%;max-height:320px;object-fit:contain;padding:1rem;">
+        <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}">
         {% else %}
         {% icono producto.subcategoria.categoria.icono size=80 color="#001530" %}
-        <span style="font-size:0.8rem;color:var(--color-text-muted);background:#fff;padding:0.3rem 0.8rem;border-radius:4px;">{{ producto.codigo }}</span>
+        <span class="producto-detalle__codigo-chip">{{ producto.codigo }}</span>
         {% endif %}
       </div>
 
