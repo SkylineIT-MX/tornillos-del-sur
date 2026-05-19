@@ -26,10 +26,14 @@
 
     <!-- Product detail -->
     <div style="display:grid;grid-template-columns:1fr 2fr;gap:2rem;margin-top:1.5rem;">
-      <!-- Image placeholder -->
-      <div style="background:linear-gradient(135deg,#f0f0f0,#e8e8e8);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:300px;flex-direction:column;gap:1rem;">
+      <!-- Image -->
+      <div style="background:linear-gradient(135deg,#f0f0f0,#e8e8e8);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:300px;flex-direction:column;gap:1rem;overflow:hidden;">
+        {% if producto.imagen %}
+        <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" style="max-width:100%;max-height:320px;object-fit:contain;padding:1rem;">
+        {% else %}
         {% icono producto.subcategoria.categoria.icono size=80 color="#001530" %}
         <span style="font-size:0.8rem;color:var(--color-text-muted);background:#fff;padding:0.3rem 0.8rem;border-radius:4px;">{{ producto.codigo }}</span>
+        {% endif %}
       </div>
 
       <!-- Info -->
@@ -91,8 +95,12 @@
       {% for rel in relacionados %}
       <a href="{% url 'tienda:producto' rel.codigo %}" class="cat-product-card" style="text-decoration:none;">
         <span class="cat-product-card__brand">{{ rel.codigo }}</span>
-        <div class="cat-product-card__image" style="height:80px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;">
+        <div class="cat-product-card__image" style="height:80px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          {% if rel.imagen %}
+          <img src="{{ MEDIA_URL }}{{ rel.imagen }}" alt="{{ rel.nombre }}" style="max-width:100%;max-height:100%;object-fit:contain;">
+          {% else %}
           {% icono producto.subcategoria.categoria.icono size=36 color="#001530" %}
+          {% endif %}
         </div>
         <span class="cat-product-card__subcategory">{{ rel.subcategoria.nombre }}</span>
         <h3 class="cat-product-card__name">{{ rel.nombre }}</h3>

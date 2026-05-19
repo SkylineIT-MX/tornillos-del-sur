@@ -108,8 +108,12 @@
         {% for producto in destacados %}
         <a href="{% url 'tienda:producto' producto.codigo %}" class="product-card" style="text-decoration:none;">
           <span class="product-card__category">{{ producto.subcategoria.categoria.nombre }}</span>
-          <div class="product-card__image" style="background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;">
+          <div class="product-card__image" style="background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            {% if producto.imagen %}
+            <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" style="max-width:100%;max-height:100%;object-fit:contain;padding:0.5rem;">
+            {% else %}
             {% icono producto.subcategoria.categoria.icono size=48 color="#001530" %}
+            {% endif %}
           </div>
           <h3 class="product-card__name">{{ producto.nombre }}</h3>
           <span class="product-card__price">{{ producto.codigo }}</span>

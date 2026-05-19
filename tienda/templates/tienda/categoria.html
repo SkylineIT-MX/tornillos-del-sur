@@ -47,8 +47,12 @@
       {% for producto in productos %}
       <a href="{% url 'tienda:producto' producto.codigo %}" class="cat-product-card" style="text-decoration:none;">
         <span class="cat-product-card__brand">{{ producto.codigo }}</span>
-        <div class="cat-product-card__image" style="height:80px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;">
+        <div class="cat-product-card__image" style="height:140px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          {% if producto.imagen %}
+          <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" style="max-width:100%;max-height:100%;object-fit:contain;padding:0.5rem;">
+          {% else %}
           {% icono categoria.icono size=36 color="#001530" %}
+          {% endif %}
         </div>
         <span class="cat-product-card__subcategory">{{ producto.subcategoria.nombre }}</span>
         <h3 class="cat-product-card__name">{{ producto.nombre }}</h3>

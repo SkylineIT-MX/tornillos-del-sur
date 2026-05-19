@@ -77,6 +77,7 @@ class Producto(models.Model):
     acabado = models.CharField(max_length=20, choices=ACABADOS, blank=True)
     norma = models.CharField(max_length=50, blank=True, help_text='Ej: UNC, UNF, Milimétrico')
     grado = models.CharField(max_length=20, blank=True, help_text='Ej: G2, G5, G8, Clase 8.8')
+    imagen = models.CharField(max_length=300, blank=True, help_text='Ruta relativa dentro de MEDIA_ROOT, ej: Tornillos/archivo.png')
     destacado = models.BooleanField(default=False)
     activo = models.BooleanField(default=True)
     creado = models.DateTimeField(auto_now_add=True)
