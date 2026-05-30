@@ -1,4 +1,7 @@
+from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
 from .models import Categoria, SubCategoria, Producto
 
@@ -62,3 +65,62 @@ def seguridad_industrial(request):
     return render(request, 'tienda/seguridad_industrial.html', {
         'categorias': Categoria.objects.all(),
     })
+
+
+def buscar(request):
+    query = (request.GET.get('q') or '').strip()
+    productos = Producto.objects.none()
+    if query:
+        terms = [t for t in query.split() if t]
+        condicion = Q()
+        for term in terms:
+            condicion &= (
+                Q(nombre__icontains=term)
+                | Q(codigo__icontains=term)
+                | Q(descripcion__icontains=term)
+                | Q(subcategoria__nombre__icontains=term)
+                | Q(subcategoria__categoria__nombre__icontains=term)
+                | Q(norma__icontains=term)
+                | Q(grado__icontains=term)
+            )
+        productos = (
+            Producto.objects.filter(condicion, activo=True)
+            .select_related('subcategoria__categoria')
+            .distinct()
+        )
+    return render(request, 'tienda/buscar.html', {
+        'query': query,
+        'productos': productos,
+        'total': productos.count() if query else 0,
+        'categorias': Categoria.objects.all(),
+    })
+
+
+def buscar_sugerencias(request):
+    query = (request.GET.get('q') or '').strip()
+    results = []
+    if len(query) >= 2:
+        terms = [t for t in query.split() if t]
+        condicion = Q()
+        for term in terms:
+            condicion &= (
+                Q(nombre__icontains=term)
+                | Q(codigo__icontains=term)
+                | Q(subcategoria__nombre__icontains=term)
+                | Q(subcategoria__categoria__nombre__icontains=term)
+            )
+        qs = (
+            Producto.objects.filter(condicion, activo=True)
+            .select_related('subcategoria__categoria')
+            .distinct()[:7]
+        )
+        for p in qs:
+            results.append({
+                'codigo': p.codigo,
+                'nombre': p.nombre,
+                'categoria': p.subcategoria.categoria.nombre,
+                'subcategoria': p.subcategoria.nombre,
+                'imagen': f'/media/{p.imagen}' if p.imagen else '',
+                'url': reverse('tienda:producto', args=[p.codigo]),
+            })
+    return JsonResponse({'query': query, 'results': results})

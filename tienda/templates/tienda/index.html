@@ -83,8 +83,8 @@
   <!-- Promo Banner -->
   <section class="big-promo">
     <div class="big-promo__inner">
-      <div class="big-promo__image" style="background:linear-gradient(135deg,#001530,#002a5c);display:flex;align-items:center;justify-content:center;">
-        {% icono "tornillo" size=80 color="#f1ac2b" %}
+      <div class="big-promo__image">
+        <img src="{% static 'tienda/images/dentro.jpg' %}" alt="Catálogo Tornillos del Sur">
       </div>
       <div class="big-promo__content">
         <span class="big-promo__tag">Catálogo completo</span>
@@ -129,11 +129,18 @@
       {% for cat in categorias|slice:":3" %}
       <a href="{% url 'tienda:categoria' cat.slug %}" class="mini-promo" style="text-decoration:none;">
         <div class="mini-promo__info">
-          <span class="mini-promo__discount" style="font-size:2rem;">{% icono cat.icono size=36 color="#f1ac2b" %}</span>
           <h3 class="mini-promo__title" style="font-size:1.1rem;">{{ cat.nombre }}</h3>
         </div>
-        <div class="mini-promo__img" style="background:var(--color-bg);display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:0.7rem;color:var(--color-text-muted);">{{ cat.subcategorias.count }} subcategorías</span>
+        <div class="mini-promo__img">
+          {% if cat.slug == 'tornillos' %}
+            <img src="{% static 'tienda/images/categorias/tornillos.jpg' %}" alt="{{ cat.nombre }}">
+          {% elif cat.slug == 'tuercas' %}
+            <img src="{% static 'tienda/images/categorias/tuercas.jpeg' %}" alt="{{ cat.nombre }}">
+          {% elif cat.slug == 'rondanas' %}
+            <img src="{% static 'tienda/images/categorias/rondanas.webp' %}" alt="{{ cat.nombre }}">
+          {% else %}
+            <span style="font-size:0.7rem;color:var(--color-text-muted);display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--color-bg);">{{ cat.subcategorias.count }} subcategorías</span>
+          {% endif %}
         </div>
       </a>
       {% endfor %}
@@ -143,8 +150,8 @@
   <!-- Promo Banner Mayoristas -->
   <section class="big-promo">
     <div class="big-promo__inner">
-      <div class="big-promo__image" style="background:linear-gradient(135deg,#001530,#002a5c);display:flex;align-items:center;justify-content:center;">
-        {% icono "estructural" size=80 color="#f1ac2b" %}
+      <div class="big-promo__image">
+        <img src="{% static 'tienda/images/mayorista.jpg' %}" alt="Ventas por volumen">
       </div>
       <div class="big-promo__content">
         <span class="big-promo__tag">Ventas por volumen</span>
@@ -155,23 +162,54 @@
     </div>
   </section>
 
-  <!-- Más categorías -->
-  <section class="products">
-    <div class="products__inner">
-      <div class="products__header">
-        <h2 class="products__title">Explora nuestras categorías</h2>
+  <!-- Sucursales -->
+  <section class="sucursales">
+    <div class="sucursales__inner">
+      <div class="sucursales__header">
+        <h2 class="sucursales__title">Visítanos</h2>
+        <p class="sucursales__subtitle">Dos sucursales para servirte en Saltillo</p>
       </div>
-      <div class="products__grid">
-        {% for cat in categorias|slice:"3:" %}
-        <a href="{% url 'tienda:categoria' cat.slug %}" class="product-card" style="text-decoration:none;">
-          <span class="product-card__category">{{ cat.subcategorias.count }} subcategorías</span>
-          <div class="product-card__image" style="background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;">
-            {% icono cat.icono size=48 color="#001530" %}
+      <div class="sucursales__grid">
+        <div class="sucursal-card">
+          <div class="sucursal-card__map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.078553764622!2d-100.99012700000002!3d25.402181000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868872d03964294f%3A0xcfb0b60cbb76400a!2sTornillos%20del%20Sur!5e0!3m2!1ses-419!2smx!4v1780105240898!5m2!1ses-419!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-          <h3 class="product-card__name">{{ cat.nombre }}</h3>
-          <span class="product-card__price" style="font-size:0.8rem;color:var(--color-text-light);">{{ cat.descripcion|truncatewords:10 }}</span>
-        </a>
-        {% endfor %}
+          <div class="sucursal-card__info">
+            <div class="sucursal-card__head">
+              <h3 class="sucursal-card__name">Sucursal Urdiñola</h3>
+              <span class="sucursal-card__badge">Abierto domingos</span>
+            </div>
+            <ul class="sucursal-card__hours">
+              <li><span>Lun – Vie</span><span>8:30 am – 6:30 pm</span></li>
+              <li><span>Sábado</span><span>8:30 am – 6:00 pm</span></li>
+              <li><span>Domingo</span><span>10:00 am – 2:00 pm</span></li>
+            </ul>
+            <a href="https://maps.google.com/?q=Tornillos+del+Sur+Urdiñola&ll=25.402181,-100.990127" target="_blank" rel="noopener" class="sucursal-card__link">Ver en Google Maps</a>
+          </div>
+        </div>
+        <div class="sucursal-card">
+          <div class="sucursal-card__map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.1776882143786!2d-101.01231969999999!3d25.3988621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868872e50257d423%3A0x34c249c59f32060e!2sTornillos%20del%20Sur!5e0!3m2!1ses-419!2smx!4v1780105254648!5m2!1ses-419!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="sucursal-card__info">
+            <div class="sucursal-card__head">
+              <h3 class="sucursal-card__name">Sucursal Luis Echeverría</h3>
+            </div>
+            <ul class="sucursal-card__hours">
+              <li><span>Lun – Vie</span><span>8:30 am – 6:30 pm</span></li>
+              <li><span>Sábado</span><span>8:30 am – 6:00 pm</span></li>
+              <li><span>Domingo</span><span>Cerrado</span></li>
+            </ul>
+            <a href="https://maps.google.com/?q=Tornillos+del+Sur+Luis+Echeverria&ll=25.3988621,-101.0123197" target="_blank" rel="noopener" class="sucursal-card__link">Ver en Google Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="entrega-banner">
+        <div class="entrega-banner__text">
+          <h3>Entrega a domicilio</h3>
+          <p>Servicio disponible en <strong>Saltillo, Ramos Arizpe y Arteaga</strong> con costo extra de <strong>$150.00</strong> en compras desde <strong>$1,500.00</strong>.</p>
+        </div>
       </div>
     </div>
   </section>

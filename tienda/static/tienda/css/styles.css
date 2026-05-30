@@ -132,8 +132,112 @@ input {
   align-items: center;
   background: var(--color-white);
   border-radius: 50px;
-  overflow: hidden;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.header__suggest {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  z-index: 1000;
+  overflow: hidden;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.header__suggest[hidden] {
+  display: none;
+}
+
+.header__suggest-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-bg);
+  transition: background 0.15s;
+}
+
+.header__suggest-item:last-child {
+  border-bottom: none;
+}
+
+.header__suggest-item:hover,
+.header__suggest-item.is-active {
+  background: var(--color-bg);
+}
+
+.header__suggest-thumb {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.header__suggest-thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.header__suggest-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.header__suggest-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header__suggest-meta {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.header__suggest-code {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.header__suggest-footer {
+  display: block;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: none;
+  background: var(--color-bg);
+}
+
+.header__suggest-empty {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
 }
 
 .header__search-category {
@@ -891,13 +995,23 @@ input {
   flex: 0 0 45%;
   height: 300px;
   overflow: hidden;
+  position: relative;
 }
 
 .big-promo__image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.8;
+  display: block;
+}
+
+.big-promo__image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,21,48,0) 55%, rgba(0,21,48,0.85) 100%),
+              linear-gradient(180deg, rgba(0,21,48,0.15), rgba(0,21,48,0.15));
+  pointer-events: none;
 }
 
 .big-promo__content {
@@ -1378,5 +1492,189 @@ input {
 
   .nav__inner {
     padding: 0 1rem;
+  }
+}
+
+/* Sucursales */
+.sucursales {
+  max-width: var(--max-width);
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.sucursales__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sucursales__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.sucursales__subtitle {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+.sucursales__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.sucursal-card {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sucursal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.sucursal-card__map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: var(--color-bg);
+}
+
+.sucursal-card__map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.sucursal-card__info {
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.sucursal-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.sucursal-card__name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.sucursal-card__badge {
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.sucursal-card__hours {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--color-bg);
+  border-bottom: 1px solid var(--color-bg);
+}
+
+.sucursal-card__hours li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  padding: 0.25rem 0;
+  color: var(--color-text-light);
+}
+
+.sucursal-card__hours li span:first-child {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.sucursal-card__link {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.sucursal-card__link:hover {
+  text-decoration: underline;
+}
+
+.entrega-banner {
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, #001530 0%, #002a5c 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.entrega-banner__icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.entrega-banner__text h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.entrega-banner__text p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+}
+
+.entrega-banner__text strong {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .sucursales__grid {
+    grid-template-columns: 1fr;
+  }
+  .sucursales__title {
+    font-size: 1.5rem;
+  }
+  .entrega-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
   }
 }

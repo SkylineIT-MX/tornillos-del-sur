@@ -11,4 +11,6 @@ urlpatterns = [
     path('catalogo/<slug:cat_slug>/<slug:sub_slug>/', views.subcategoria_detalle, name='subcategoria'),
     path('producto/<str:codigo>/', views.producto_detalle, name='producto'),
     path('seguridad-industrial/', views.seguridad_industrial, name='seguridad_industrial'),
+    path('buscar/', views.buscar, name='buscar'),
+    path('buscar/sugerencias/', views.buscar_sugerencias, name='buscar_sugerencias'),
 ]

@@ -1,0 +1,64 @@
+{% extends "tienda/base.html" %}
+{% load static iconos %}
+
+{% block title %}{% if query %}Resultados para "{{ query }}"{% else %}Buscar{% endif %} - Tornillos del Sur{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'tienda/css/category.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="cat-products" style="margin-top:2rem;">
+  <div class="cat-products__inner">
+    <div class="cat-products__header">
+      <div class="cat-products__breadcrumb">
+        <h2>
+          {% if query %}
+            Resultados para “{{ query }}”
+          {% else %}
+            Buscar productos
+          {% endif %}
+        </h2>
+        <span class="cat-products__breadcrumb-trail">
+          <a href="{% url 'tienda:index' %}">Inicio</a> &rsaquo;
+          {% if query %}{{ total }} resultado{{ total|pluralize }}{% else %}Búsqueda{% endif %}
+        </span>
+      </div>
+    </div>
+
+    {% if not query %}
+      <p style="color:var(--color-text-light);margin:1rem 0;">Escribe en el buscador de arriba para encontrar productos por nombre, código, material o categoría.</p>
+    {% elif productos %}
+      <div class="cat-products__grid">
+        {% for producto in productos %}
+        <a href="{% url 'tienda:producto' producto.codigo %}" class="cat-product-card" style="text-decoration:none;">
+          <span class="cat-product-card__brand">{{ producto.codigo }}</span>
+          <div class="cat-product-card__image" style="height:140px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            {% if producto.imagen %}
+            <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" style="max-width:100%;max-height:100%;object-fit:contain;padding:0.5rem;">
+            {% else %}
+            {% icono producto.subcategoria.categoria.icono size=36 color="#001530" %}
+            {% endif %}
+          </div>
+          <span class="cat-product-card__subcategory">{{ producto.subcategoria.categoria.nombre }} / {{ producto.subcategoria.nombre }}</span>
+          <h3 class="cat-product-card__name">{{ producto.nombre }}</h3>
+          <div class="cat-product-card__pricing">
+            {% if producto.material %}
+            <span style="font-size:0.7rem;background:var(--color-bg);padding:0.2rem 0.5rem;border-radius:3px;color:var(--color-text-light);">{{ producto.get_material_display }}</span>
+            {% endif %}
+            {% if producto.acabado %}
+            <span style="font-size:0.7rem;background:var(--color-bg);padding:0.2rem 0.5rem;border-radius:3px;color:var(--color-text-light);">{{ producto.get_acabado_display }}</span>
+            {% endif %}
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div style="padding:3rem 1rem;text-align:center;color:var(--color-text-light);">
+        <h3 style="color:var(--color-primary);margin-bottom:0.5rem;">Sin resultados</h3>
+        <p>No encontramos productos que coincidan con “{{ query }}”. Prueba con otra palabra o explora el <a href="{% url 'tienda:catalogo' %}" style="color:var(--color-accent);">catálogo completo</a>.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
