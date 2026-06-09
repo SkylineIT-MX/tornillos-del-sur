@@ -1,7 +1,50 @@
 {% extends "tienda/base.html" %}
 {% load static iconos %}
 
-{% block title %}{{ producto.nombre }} - Tornillos del Sur{% endblock %}
+{% block title %}{{ producto.nombre }} | {{ producto.subcategoria.categoria.nombre }} en Saltillo · Tornillos del Sur{% endblock %}
+
+{% block meta_description %}{{ producto.nombre }} ({{ producto.codigo }}){% if producto.material %} en {{ producto.get_material_display }}{% endif %}{% if producto.acabado %}, acabado {{ producto.get_acabado_display }}{% endif %}. Disponible en Tornillos del Sur, Saltillo. Entrega a domicilio en Saltillo, Ramos Arizpe y Arteaga.{% endblock %}
+
+{% block og_type %}product{% endblock %}
+{% block og_title %}{{ producto.nombre }} | Tornillos del Sur Saltillo{% endblock %}
+{% block og_description %}{{ producto.nombre }} ({{ producto.codigo }}). Tornillería y ferretería en Saltillo, Coahuila.{% endblock %}
+{% block og_image %}{% if producto.imagen %}https://tornillosdelsur.com.mx{{ MEDIA_URL }}{{ producto.imagen }}{% else %}https://tornillosdelsur.com.mx{% static 'tienda/images/Logo_tornillos_del_sur.png' %}{% endif %}{% endblock %}
+
+{% block extra_jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ producto.nombre|escapejs }}",
+  "sku": "{{ producto.codigo|escapejs }}",
+  "category": "{{ producto.subcategoria.categoria.nombre|escapejs }} / {{ producto.subcategoria.nombre|escapejs }}",
+  {% if producto.descripcion %}"description": "{{ producto.descripcion|escapejs }}",{% endif %}
+  {% if producto.imagen %}"image": "https://tornillosdelsur.com.mx{{ MEDIA_URL }}{{ producto.imagen }}",{% endif %}
+  "brand": {"@type": "Brand", "name": "Tornillos del Sur"},
+  "offers": {
+    "@type": "Offer",
+    "url": "https://tornillosdelsur.com.mx{{ request.path }}",
+    "priceCurrency": "MXN",
+    "availability": "https://schema.org/InStock",
+    "seller": {"@type": "Organization", "name": "Tornillos del Sur", "@id": "https://tornillosdelsur.com.mx/#business"},
+    "areaServed": ["Saltillo", "Ramos Arizpe", "Arteaga"]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://tornillosdelsur.com.mx/"},
+    {"@type": "ListItem", "position": 2, "name": "Catálogo", "item": "https://tornillosdelsur.com.mx{% url 'tienda:catalogo' %}"},
+    {"@type": "ListItem", "position": 3, "name": "{{ producto.subcategoria.categoria.nombre|escapejs }}", "item": "https://tornillosdelsur.com.mx{% url 'tienda:categoria' producto.subcategoria.categoria.slug %}"},
+    {"@type": "ListItem", "position": 4, "name": "{{ producto.subcategoria.nombre|escapejs }}", "item": "https://tornillosdelsur.com.mx{% url 'tienda:subcategoria' producto.subcategoria.categoria.slug producto.subcategoria.slug %}"},
+    {"@type": "ListItem", "position": 5, "name": "{{ producto.nombre|escapejs }}"}
+  ]
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'tienda/css/category.css' %}">
@@ -9,11 +52,16 @@
   .producto-detalle__grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: 2rem;
+    grid-template-areas:
+      "media header"
+      "media body";
+    column-gap: 2rem;
+    row-gap: 1rem;
     margin-top: 1.5rem;
     align-items: start;
   }
   .producto-detalle__media {
+    grid-area: media;
     background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
     border-radius: var(--radius);
     display: flex;
@@ -30,6 +78,8 @@
     max-height: 100%;
     object-fit: contain;
   }
+  .producto-detalle__header { grid-area: header; }
+  .producto-detalle__body { grid-area: body; }
   .producto-detalle__codigo-chip {
     font-size: 0.8rem;
     color: var(--color-text-muted);
@@ -40,7 +90,11 @@
   @media (max-width: 720px) {
     .producto-detalle__grid {
       grid-template-columns: 1fr;
-      gap: 1.25rem;
+      grid-template-areas:
+        "header"
+        "media"
+        "body";
+      gap: 1rem;
     }
     .producto-detalle__media {
       aspect-ratio: auto;
@@ -73,18 +127,21 @@
       <!-- Image -->
       <div class="producto-detalle__media">
         {% if producto.imagen %}
-        <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}">
+        <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" width="600" height="600" decoding="async" fetchpriority="high">
         {% else %}
         {% icono producto.subcategoria.categoria.icono size=80 color="#001530" %}
         <span class="producto-detalle__codigo-chip">{{ producto.codigo }}</span>
         {% endif %}
       </div>
 
-      <!-- Info -->
-      <div>
+      <!-- Header (categoría + título) -->
+      <div class="producto-detalle__header">
         <span style="font-size:0.8rem;color:var(--color-accent);font-weight:500;text-transform:uppercase;">{{ producto.subcategoria.categoria.nombre }} / {{ producto.subcategoria.nombre }}</span>
-        <h1 style="font-size:1.75rem;font-weight:500;color:var(--color-primary);margin:0.5rem 0 1rem;">{{ producto.nombre }}</h1>
+        <h1 style="font-size:1.75rem;font-weight:500;color:var(--color-primary);margin:0.5rem 0 0;">{{ producto.nombre }}</h1>
+      </div>
 
+      <!-- Body (descripción + specs + cta) -->
+      <div class="producto-detalle__body">
         {% if producto.descripcion %}
         <p style="color:var(--color-text-light);line-height:1.7;margin-bottom:1.5rem;">{{ producto.descripcion }}</p>
         {% endif %}
@@ -141,7 +198,7 @@
         <span class="cat-product-card__brand">{{ rel.codigo }}</span>
         <div class="cat-product-card__image" style="height:80px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;overflow:hidden;">
           {% if rel.imagen %}
-          <img src="{{ MEDIA_URL }}{{ rel.imagen }}" alt="{{ rel.nombre }}" style="max-width:100%;max-height:100%;object-fit:contain;">
+          <img src="{{ MEDIA_URL }}{{ rel.imagen }}" alt="{{ rel.nombre }}" loading="lazy" decoding="async" width="160" height="80" style="max-width:100%;max-height:100%;object-fit:contain;">
           {% else %}
           {% icono producto.subcategoria.categoria.icono size=36 color="#001530" %}
           {% endif %}

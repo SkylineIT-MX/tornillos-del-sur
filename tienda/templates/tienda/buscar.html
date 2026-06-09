@@ -1,7 +1,9 @@
 {% extends "tienda/base.html" %}
 {% load static iconos %}
 
-{% block title %}{% if query %}Resultados para "{{ query }}"{% else %}Buscar{% endif %} - Tornillos del Sur{% endblock %}
+{% block title %}{% if query %}{{ query }} — {{ total }} resultado{{ total|pluralize }} | Tornillos del Sur Saltillo{% else %}Buscar productos | Tornillos del Sur Saltillo{% endif %}{% endblock %}
+{% block meta_description %}{% if query %}Resultados para "{{ query }}": {{ total }} producto{{ total|pluralize }} de tornillería y ferretería en Saltillo.{% else %}Buscador de productos: encuentra tornillos, tuercas, rondanas y más en Tornillos del Sur Saltillo.{% endif %}{% endblock %}
+{% block meta_robots %}{% if query %}noindex, follow{% else %}index, follow{% endif %}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'tienda/css/category.css' %}">
@@ -35,7 +37,7 @@
           <span class="cat-product-card__brand">{{ producto.codigo }}</span>
           <div class="cat-product-card__image" style="height:140px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;overflow:hidden;">
             {% if producto.imagen %}
-            <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" style="max-width:100%;max-height:100%;object-fit:contain;padding:0.5rem;">
+            <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" loading="lazy" decoding="async" width="200" height="200" style="max-width:100%;max-height:100%;object-fit:contain;padding:0.5rem;">
             {% else %}
             {% icono producto.subcategoria.categoria.icono size=36 color="#001530" %}
             {% endif %}

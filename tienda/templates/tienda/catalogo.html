@@ -1,7 +1,10 @@
 {% extends "tienda/base.html" %}
 {% load static iconos %}
 
-{% block title %}Catálogo - Tornillos del Sur{% endblock %}
+{% block title %}Catálogo completo: tornillería y ferretería en Saltillo | Tornillos del Sur{% endblock %}
+{% block meta_description %}Catálogo completo de tornillería y ferretería en Saltillo, Coahuila: tornillos, tuercas, rondanas, pijas, taquetes, acero inoxidable, automotriz, estructural y más. {{ total_productos }} productos.{% endblock %}
+{% block og_title %}Catálogo completo | Tornillos del Sur Saltillo{% endblock %}
+{% block og_description %}{{ total_productos }} productos de tornillería y ferretería en Saltillo, Coahuila.{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'tienda/css/category.css' %}">

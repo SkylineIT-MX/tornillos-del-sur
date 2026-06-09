@@ -1,6 +1,12 @@
 {% extends "tienda/base.html" %}
 {% load static iconos %}
 
+{% block title %}Tornillos del Sur Saltillo · Ferretería y Tornillería | Entrega a domicilio{% endblock %}
+{% block meta_description %}Ferretería y tornillería en Saltillo, Coahuila con 2 sucursales (Urdiñola y Luis Echeverría). Más de 179 productos: tornillos, tuercas, rondanas, acero inoxidable, automotriz y más. Entrega a domicilio en Saltillo, Ramos Arizpe y Arteaga.{% endblock %}
+{% block og_title %}Tornillos del Sur Saltillo · Ferretería y Tornillería{% endblock %}
+{% block og_description %}179+ productos · 2 sucursales en Saltillo · Entrega a domicilio en Saltillo, Ramos Arizpe y Arteaga. Domingos abiertos en sucursal Urdiñola.{% endblock %}
+{% block og_image %}https://tornillosdelsur.com.mx{% static 'tienda/images/dentro.jpg' %}{% endblock %}
+
 {% block nav_inicio %}nav__link--active{% endblock %}
 
 {% block content %}
@@ -110,7 +116,7 @@
           <span class="product-card__category">{{ producto.subcategoria.categoria.nombre }}</span>
           <div class="product-card__image" style="background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;overflow:hidden;">
             {% if producto.imagen %}
-            <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" style="max-width:100%;max-height:100%;object-fit:contain;padding:0.5rem;">
+            <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" loading="lazy" decoding="async" width="200" height="200" style="max-width:100%;max-height:100%;object-fit:contain;padding:0.5rem;">
             {% else %}
             {% icono producto.subcategoria.categoria.icono size=48 color="#001530" %}
             {% endif %}
@@ -163,7 +169,7 @@
   </section>
 
   <!-- Sucursales -->
-  <section class="sucursales">
+  <section class="sucursales" id="sucursales">
     <div class="sucursales__inner">
       <div class="sucursales__header">
         <h2 class="sucursales__title">Visítanos</h2>

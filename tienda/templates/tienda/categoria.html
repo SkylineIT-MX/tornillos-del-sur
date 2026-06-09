@@ -1,7 +1,10 @@
 {% extends "tienda/base.html" %}
 {% load static iconos %}
 
-{% block title %}{{ categoria.nombre }} - Tornillos del Sur{% endblock %}
+{% block title %}{{ categoria.nombre }} en Saltillo | Tornillos del Sur{% endblock %}
+{% block meta_description %}{{ categoria.nombre }}: {% if categoria.descripcion %}{{ categoria.descripcion|truncatechars:140 }}{% else %}variedad de {{ categoria.nombre|lower }} en Saltillo. {{ productos.count }} productos disponibles con entrega a domicilio.{% endif %}{% endblock %}
+{% block og_title %}{{ categoria.nombre }} | Tornillos del Sur Saltillo{% endblock %}
+{% block og_description %}{{ productos.count }} productos de {{ categoria.nombre|lower }} disponibles en Saltillo. {{ categoria.subcategorias.count }} subcategorías.{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'tienda/css/category.css' %}">
@@ -49,7 +52,7 @@
         <span class="cat-product-card__brand">{{ producto.codigo }}</span>
         <div class="cat-product-card__image" style="height:140px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;overflow:hidden;">
           {% if producto.imagen %}
-          <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" style="max-width:100%;max-height:100%;object-fit:contain;padding:0.5rem;">
+          <img src="{{ MEDIA_URL }}{{ producto.imagen }}" alt="{{ producto.nombre }}" loading="lazy" decoding="async" width="200" height="200" style="max-width:100%;max-height:100%;object-fit:contain;padding:0.5rem;">
           {% else %}
           {% icono categoria.icono size=36 color="#001530" %}
           {% endif %}

@@ -197,3 +197,50 @@ if (searchInput) {
     if (!form.contains(e.target)) hide();
   });
 })();
+
+// Mobile drawer
+(function() {
+  const hamburger = document.querySelector('.header__hamburger');
+  const drawer = document.getElementById('mobile-drawer');
+  const overlay = document.querySelector('.drawer-overlay');
+  const closeBtn = document.querySelector('.drawer__close');
+  if (!hamburger || !drawer || !overlay) return;
+
+  function open() {
+    drawer.hidden = false;
+    overlay.hidden = false;
+    // Force reflow before applying transition class
+    requestAnimationFrame(() => {
+      drawer.classList.add('is-open');
+      overlay.classList.add('is-open');
+    });
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('drawer-open');
+  }
+
+  function close() {
+    drawer.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('drawer-open');
+    setTimeout(() => {
+      drawer.hidden = true;
+      overlay.hidden = true;
+    }, 280);
+  }
+
+  hamburger.addEventListener('click', () => {
+    if (hamburger.getAttribute('aria-expanded') === 'true') {
+      close();
+    } else {
+      open();
+    }
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && hamburger.getAttribute('aria-expanded') === 'true') close();
+  });
+})();
