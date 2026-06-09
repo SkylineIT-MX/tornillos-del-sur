@@ -44,10 +44,18 @@ def robots_txt(request):
     return HttpResponse('\n'.join(lines), content_type='text/plain')
 
 
+def google_site_verification(request):
+    return HttpResponse(
+        'google-site-verification: googleb2651373df8160ec.html',
+        content_type='text/html',
+    )
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', robots_txt),
+    path('googleb2651373df8160ec.html', google_site_verification),
     path('', include('tienda.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
