@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.templatetags.static import static
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +30,8 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'tornillosdelsur.com.mx,www.torn
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
+    'unfold.contrib.filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,3 +134,76 @@ MEDIA_ROOT = os.environ.get('MEDIA_ROOT', BASE_DIR / 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# django-unfold admin theme
+# https://unfoldadmin.com/docs/
+UNFOLD = {
+    'SITE_TITLE': 'Tornillos del Sur',
+    'SITE_HEADER': 'Tornillos del Sur',
+    'SITE_SUBHEADER': 'Catálogo y administración',
+    'SITE_SYMBOL': 'settings',  # icono Material Symbols en la barra lateral
+    'SITE_LOGO': lambda request: static('tienda/images/Logo_tornillos_del_sur.png'),
+    'SITE_ICON': lambda request: static('tienda/images/Logo_tornillos_del_sur.png'),
+    'SHOW_HISTORY': True,
+    'SHOW_VIEW_ON_SITE': True,
+    'COLORS': {
+        # Paleta acero/industrial (slate)
+        'primary': {
+            '50': '248 250 252',
+            '100': '241 245 249',
+            '200': '226 232 240',
+            '300': '203 213 225',
+            '400': '148 163 184',
+            '500': '100 116 139',
+            '600': '71 85 105',
+            '700': '51 65 85',
+            '800': '30 41 59',
+            '900': '15 23 42',
+            '950': '2 6 23',
+        },
+    },
+    'SIDEBAR': {
+        'show_search': True,
+        'show_all_applications': True,
+        'navigation': [
+            {
+                'title': _('Catálogo'),
+                'separator': True,
+                'items': [
+                    {
+                        'title': _('Productos'),
+                        'icon': 'inventory_2',
+                        'link': reverse_lazy('admin:tienda_producto_changelist'),
+                    },
+                    {
+                        'title': _('Categorías'),
+                        'icon': 'category',
+                        'link': reverse_lazy('admin:tienda_categoria_changelist'),
+                    },
+                    {
+                        'title': _('Subcategorías'),
+                        'icon': 'account_tree',
+                        'link': reverse_lazy('admin:tienda_subcategoria_changelist'),
+                    },
+                ],
+            },
+            {
+                'title': _('Administración'),
+                'separator': True,
+                'items': [
+                    {
+                        'title': _('Usuarios'),
+                        'icon': 'person',
+                        'link': reverse_lazy('admin:auth_user_changelist'),
+                    },
+                    {
+                        'title': _('Grupos'),
+                        'icon': 'group',
+                        'link': reverse_lazy('admin:auth_group_changelist'),
+                    },
+                ],
+            },
+        ],
+    },
+}

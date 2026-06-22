@@ -439,9 +439,12 @@ class Command(BaseCommand):
     help = 'Carga el catálogo completo de productos de Tornillos del Sur'
 
     def handle(self, *args, **options):
+        # Comando idempotente y NO destructivo: solo crea lo que falta.
+        # Usa get_or_create para no sobrescribir ediciones hechas en el admin
+        # (este comando corre en cada deploy vía Procfile release).
         productos_creados = 0
         for cat_nombre, cat_data in CATALOGO.items():
-            categoria, _ = Categoria.objects.update_or_create(
+            categoria, _ = Categoria.objects.get_or_create(
                 nombre=cat_nombre,
                 defaults={
                     'descripcion': cat_data['descripcion'],
@@ -452,7 +455,7 @@ class Command(BaseCommand):
             self.stdout.write(f'  Categoría: {categoria.nombre}')
 
             for sub_nombre, sub_data in cat_data['subcategorias'].items():
-                subcategoria, _ = SubCategoria.objects.update_or_create(
+                subcategoria, _ = SubCategoria.objects.get_or_create(
                     categoria=categoria,
                     nombre=sub_nombre,
                     defaults={
@@ -462,7 +465,7 @@ class Command(BaseCommand):
                 self.stdout.write(f'    Subcategoría: {subcategoria.nombre}')
 
                 for prod_data in sub_data['productos']:
-                    _, created = Producto.objects.update_or_create(
+                    _, created = Producto.objects.get_or_create(
                         codigo=prod_data['codigo'],
                         defaults={
                             'subcategoria': subcategoria,

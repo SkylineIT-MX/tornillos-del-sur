@@ -61,6 +61,11 @@ class Command(BaseCommand):
         asignados = 0
         sin_imagen = []
         for producto in Producto.objects.all():
+            # No sobrescribir imágenes ya asignadas (p. ej. subidas desde el
+            # admin). Solo se rellenan productos sin imagen. Usa --reset para
+            # forzar un re-escaneo completo de forma manual.
+            if producto.imagen:
+                continue
             base = nombre_archivo_base(producto.nombre).lower()
             archivo = indice.get(base)
             if archivo is None:
