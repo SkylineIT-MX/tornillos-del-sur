@@ -1,0 +1,204 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tornillos-del-sur\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Welcome back to"
+msgstr "Bienvenido de nuevo a"
+
+msgid "Log in"
+msgstr "Iniciar sesión"
+
+msgid "Log in again"
+msgstr "Iniciar sesión de nuevo"
+
+msgid "Log out"
+msgstr "Cerrar sesión"
+
+msgid "Forgotten your password or username?"
+msgstr "¿Olvidaste tu contraseña o usuario?"
+
+msgid "You have been successfully logged out from the administration"
+msgstr "Has cerrado sesión correctamente en la administración"
+
+msgid "Return to site"
+msgstr "Volver al sitio"
+
+msgid "Go back"
+msgstr "Regresar"
+
+msgid "All applications"
+msgstr "Todas las aplicaciones"
+
+msgid "Search apps and models..."
+msgstr "Buscar aplicaciones y modelos..."
+
+msgid "Filter navigation items"
+msgstr "Filtrar elementos de navegación"
+
+msgid "Type to search"
+msgstr "Escribe para buscar"
+
+msgid "More actions"
+msgstr "Más acciones"
+
+msgid "View on site"
+msgstr "Ver en el sitio"
+
+msgid "View site"
+msgstr "Ver sitio"
+
+msgid "General"
+msgstr "General"
+
+msgid "System"
+msgstr "Sistema"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Summary"
+msgstr "Resumen"
+
+msgid "and"
+msgstr "y"
+
+msgid "Filters"
+msgstr "Filtros"
+
+msgid "Apply Filters"
+msgstr "Aplicar filtros"
+
+msgid "Reset filters"
+msgstr "Restablecer filtros"
+
+msgid "Clear all filters"
+msgstr "Limpiar todos los filtros"
+
+msgid "Clear selection"
+msgstr "Limpiar selección"
+
+msgid "Show all"
+msgstr "Mostrar todo"
+
+msgid "Show counts"
+msgstr "Mostrar conteos"
+
+msgid "Hide counts"
+msgstr "Ocultar conteos"
+
+msgid "Toggle sorting"
+msgstr "Alternar ordenamiento"
+
+msgid "Remove from sorting"
+msgstr "Quitar del ordenamiento"
+
+msgid "Expand row"
+msgstr "Expandir fila"
+
+msgid "Add row"
+msgstr "Agregar fila"
+
+msgid "Select all rows"
+msgstr "Seleccionar todas las filas"
+
+msgid "Click here to select the objects across all pages"
+msgstr "Haz clic aquí para seleccionar los objetos de todas las páginas"
+
+msgid "No data"
+msgstr "Sin datos"
+
+msgid "No results found"
+msgstr "No se encontraron resultados"
+
+msgid "No results matching your query"
+msgstr "No hay resultados que coincidan con tu búsqueda"
+
+msgid "This page yielded into no results. Create a new item or reset your filters."
+msgstr "Esta página no arrojó resultados. Crea un elemento nuevo o restablece los filtros."
+
+msgid "Loading more results..."
+msgstr "Cargando más resultados..."
+
+msgid "Objects"
+msgstr "Objetos"
+
+msgid "Unknown"
+msgstr "Desconocido"
+
+msgid "Unknown content"
+msgstr "Contenido desconocido"
+
+msgid "Run"
+msgstr "Ejecutar"
+
+msgid "Run the selected action"
+msgstr "Ejecutar la acción seleccionada"
+
+msgid "Select action"
+msgstr "Seleccionar acción"
+
+msgid "Select action to run"
+msgstr "Seleccionar acción a ejecutar"
+
+msgid "Save and view"
+msgstr "Guardar y ver"
+
+msgid "Remove"
+msgstr "Quitar"
+
+msgid "Choose file to upload"
+msgstr "Elegir archivo para subir"
+
+msgid "Click to download"
+msgstr "Haz clic para descargar"
+
+msgid "Image preview"
+msgstr "Vista previa de imagen"
+
+msgid "Record picture"
+msgstr "Imagen del registro"
+
+msgid "Select record"
+msgstr "Seleccionar registro"
+
+msgid "Select value"
+msgstr "Seleccionar valor"
+
+msgid "Select currency"
+msgstr "Seleccionar moneda"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Date/time"
+msgstr "Fecha/hora"
+
+msgid "Date from"
+msgstr "Fecha desde"
+
+msgid "Date to"
+msgstr "Fecha hasta"
+
+msgid "From"
+msgstr "Desde"
+
+msgid "To"
+msgstr "Hasta"
+
+msgid "Recent searches"
+msgstr "Búsquedas recientes"
+
+msgid "No recent searches"
+msgstr "Sin búsquedas recientes"
+
+msgid "Light"
+msgstr "Claro"
+
+msgid "Dark"
+msgstr "Oscuro"
