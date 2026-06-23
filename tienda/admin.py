@@ -1,8 +1,12 @@
 from django.contrib import admin
+from django.contrib.sites.models import Site
 from django.utils.html import format_html
 from unfold.admin import ModelAdmin, TabularInline
 
 from .models import Categoria, SubCategoria, Producto
+
+# Ocultar "Sitios" (django.contrib.sites) del panel de administración.
+admin.site.unregister(Site)
 
 
 class SubCategoriaInline(TabularInline):
