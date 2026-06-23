@@ -1,12 +1,34 @@
 from django.contrib import admin
+from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import Group, User
 from django.contrib.sites.models import Site
 from django.utils.html import format_html
 from unfold.admin import ModelAdmin, TabularInline
+from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationForm
 
 from .models import Categoria, SubCategoria, Producto
 
 # Ocultar "Sitios" (django.contrib.sites) del panel de administración.
 admin.site.unregister(Site)
+
+# Re-registrar Usuarios y Grupos con el ModelAdmin de Unfold para que se vean
+# con el tema y muestren correctamente sus controles (incluido el botón de
+# "Agregar usuario"). El admin por defecto de Django no rinde con Unfold.
+admin.site.unregister(User)
+admin.site.unregister(Group)
+
+
+@admin.register(User)
+class UserAdmin(BaseUserAdmin, ModelAdmin):
+    form = UserChangeForm
+    add_form = UserCreationForm
+    change_password_form = AdminPasswordChangeForm
+
+
+@admin.register(Group)
+class GroupAdmin(BaseGroupAdmin, ModelAdmin):
+    pass
 
 
 class SubCategoriaInline(TabularInline):
