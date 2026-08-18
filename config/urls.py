@@ -18,7 +18,9 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.http import HttpResponse
+from django.templatetags.static import static as static_url
 from django.urls import include, path, re_path
+from django.views.generic.base import RedirectView
 from django.views.static import serve
 
 from tienda.sitemaps import (
@@ -55,6 +57,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', robots_txt),
+    # Los navegadores y algunos crawlers piden /favicon.ico en la raíz
+    path(
+        'favicon.ico',
+        RedirectView.as_view(url=static_url('tienda/images/icons/favicon.ico'), permanent=True),
+    ),
     path('googleb2651373df8160ec.html', google_site_verification),
     path('', include('tienda.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),

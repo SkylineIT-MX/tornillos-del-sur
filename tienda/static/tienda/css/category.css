@@ -295,9 +295,11 @@
 }
 
 .cat-product-card__price {
+  display: block;
   font-size: 1.125rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-primary);
+  margin-bottom: 0.35rem;
 }
 
 .cat-product-card__stars {

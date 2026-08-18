@@ -181,6 +181,11 @@ UNFOLD = {
                         'link': reverse_lazy('admin:tienda_producto_changelist'),
                     },
                     {
+                        'title': _('Precios'),
+                        'icon': 'sell',
+                        'link': reverse_lazy('admin:tienda_producto_precios'),
+                    },
+                    {
                         'title': _('Categorías'),
                         'icon': 'category',
                         'link': reverse_lazy('admin:tienda_categoria_changelist'),

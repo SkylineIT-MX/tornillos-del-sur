@@ -8,7 +8,9 @@
 {% block og_type %}product{% endblock %}
 {% block og_title %}{{ producto.nombre }} | Tornillos del Sur Saltillo{% endblock %}
 {% block og_description %}{{ producto.nombre }} ({{ producto.codigo }}). Tornillería y ferretería en Saltillo, Coahuila.{% endblock %}
-{% block og_image %}{% if producto.imagen %}https://tornillosdelsur.com.mx{{ MEDIA_URL }}{{ producto.imagen }}{% else %}https://tornillosdelsur.com.mx{% static 'tienda/images/Logo_tornillos_del_sur.png' %}{% endif %}{% endblock %}
+{% block og_image %}{% if producto.imagen %}https://tornillosdelsur.com.mx{{ MEDIA_URL }}{{ producto.imagen }}{% else %}https://tornillosdelsur.com.mx{% static 'tienda/images/og-tornillos-del-sur.png' %}{% endif %}{% endblock %}
+{% block og_image_dimensiones %}{% endblock %}
+{% block og_image_alt %}{{ producto.nombre }} · Tornillos del Sur{% endblock %}
 
 {% block extra_jsonld %}
 <script type="application/ld+json">
@@ -25,6 +27,7 @@
     "@type": "Offer",
     "url": "https://tornillosdelsur.com.mx{{ request.path }}",
     "priceCurrency": "MXN",
+    {% if producto.precio_visible %}"price": "{{ producto.precio|stringformat:'.2f' }}",{% endif %}
     "availability": "https://schema.org/InStock",
     "seller": {"@type": "Organization", "name": "Tornillos del Sur", "@id": "https://tornillosdelsur.com.mx/#business"},
     "areaServed": ["Saltillo", "Ramos Arizpe", "Arteaga"]
@@ -80,6 +83,24 @@
   }
   .producto-detalle__header { grid-area: header; }
   .producto-detalle__body { grid-area: body; }
+  .producto-detalle__precio {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .producto-detalle__precio-valor {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+  .producto-detalle__precio-moneda {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
   .producto-detalle__codigo-chip {
     font-size: 0.8rem;
     color: var(--color-text-muted);
@@ -142,6 +163,13 @@
 
       <!-- Body (descripción + specs + cta) -->
       <div class="producto-detalle__body">
+        {% if producto.precio_visible %}
+        <div class="producto-detalle__precio">
+          <span class="producto-detalle__precio-valor">{{ producto.precio_formateado }}</span>
+          <span class="producto-detalle__precio-moneda">MXN</span>
+        </div>
+        {% endif %}
+
         {% if producto.descripcion %}
         <p style="color:var(--color-text-light);line-height:1.7;margin-bottom:1.5rem;">{{ producto.descripcion }}</p>
         {% endif %}
@@ -205,6 +233,9 @@
         </div>
         <span class="cat-product-card__subcategory">{{ rel.subcategoria.nombre }}</span>
         <h3 class="cat-product-card__name">{{ rel.nombre }}</h3>
+        {% if rel.precio_visible %}
+        <span class="cat-product-card__price">{{ rel.precio_formateado }}</span>
+        {% endif %}
       </a>
       {% endfor %}
     </div>

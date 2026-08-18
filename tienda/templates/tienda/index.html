@@ -5,7 +5,6 @@
 {% block meta_description %}Ferretería y tornillería en Saltillo, Coahuila con 2 sucursales (Urdiñola y Luis Echeverría). Más de 179 productos: tornillos, tuercas, rondanas, acero inoxidable, automotriz y más. Entrega a domicilio en Saltillo, Ramos Arizpe y Arteaga.{% endblock %}
 {% block og_title %}Tornillos del Sur Saltillo · Ferretería y Tornillería{% endblock %}
 {% block og_description %}179+ productos · 2 sucursales en Saltillo · Entrega a domicilio en Saltillo, Ramos Arizpe y Arteaga. Domingos abiertos en sucursal Urdiñola.{% endblock %}
-{% block og_image %}https://tornillosdelsur.com.mx{% static 'tienda/images/dentro.jpg' %}{% endblock %}
 
 {% block nav_inicio %}nav__link--active{% endblock %}
 
@@ -122,7 +121,12 @@
             {% endif %}
           </div>
           <h3 class="product-card__name">{{ producto.nombre }}</h3>
+          {% if producto.precio_visible %}
+          <span class="product-card__price">{{ producto.precio_formateado }}</span>
+          <span class="product-card__code">{{ producto.codigo }}</span>
+          {% else %}
           <span class="product-card__price">{{ producto.codigo }}</span>
+          {% endif %}
         </a>
         {% endfor %}
       </div>
@@ -190,6 +194,10 @@
               <li><span>Sábado</span><span>8:30 am – 6:00 pm</span></li>
               <li><span>Domingo</span><span>10:00 am – 2:00 pm</span></li>
             </ul>
+            <a href="mailto:ventas1@tornillosdelsur.com.mx" class="sucursal-card__mail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+              ventas1@tornillosdelsur.com.mx
+            </a>
             <a href="https://maps.google.com/?q=Tornillos+del+Sur+Urdiñola&ll=25.402181,-100.990127" target="_blank" rel="noopener" class="sucursal-card__link">Ver en Google Maps</a>
           </div>
         </div>
@@ -206,6 +214,10 @@
               <li><span>Sábado</span><span>8:30 am – 6:00 pm</span></li>
               <li><span>Domingo</span><span>Cerrado</span></li>
             </ul>
+            <a href="mailto:ventas2@tornillosdelsur.com.mx" class="sucursal-card__mail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+              ventas2@tornillosdelsur.com.mx
+            </a>
             <a href="https://maps.google.com/?q=Tornillos+del+Sur+Luis+Echeverria&ll=25.3988621,-101.0123197" target="_blank" rel="noopener" class="sucursal-card__link">Ver en Google Maps</a>
           </div>
         </div>

@@ -45,6 +45,9 @@
           <span class="cat-product-card__subcategory">{{ producto.subcategoria.categoria.nombre }} / {{ producto.subcategoria.nombre }}</span>
           <h3 class="cat-product-card__name">{{ producto.nombre }}</h3>
           <div class="cat-product-card__pricing">
+            {% if producto.precio_visible %}
+            <span class="cat-product-card__price">{{ producto.precio_formateado }}</span>
+            {% endif %}
             {% if producto.material %}
             <span style="font-size:0.7rem;background:var(--color-bg);padding:0.2rem 0.5rem;border-radius:3px;color:var(--color-text-light);">{{ producto.get_material_display }}</span>
             {% endif %}

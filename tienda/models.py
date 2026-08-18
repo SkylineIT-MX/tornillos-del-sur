@@ -1,3 +1,6 @@
+from decimal import Decimal
+
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
@@ -78,6 +81,20 @@ class Producto(models.Model):
     norma = models.CharField(max_length=50, blank=True, help_text='Ej: UNC, UNF, Milimétrico')
     grado = models.CharField(max_length=20, blank=True, help_text='Ej: G2, G5, G8, Clase 8.8')
     imagen = models.ImageField(upload_to='productos/', max_length=300, blank=True, help_text='Imagen del producto')
+    precio = models.DecimalField(
+        'precio',
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(Decimal('0'))],
+        help_text='Precio en pesos (MXN). Déjalo vacío si este producto no maneja precio público.',
+    )
+    mostrar_precio = models.BooleanField(
+        'mostrar precio',
+        default=True,
+        help_text='Si se desactiva, el precio se conserva guardado pero deja de aparecer en el sitio.',
+    )
     destacado = models.BooleanField(default=False)
     activo = models.BooleanField(default=True)
     creado = models.DateTimeField(auto_now_add=True)
@@ -93,3 +110,15 @@ class Producto(models.Model):
         if not self.slug:
             self.slug = slugify(self.nombre)
         super().save(*args, **kwargs)
+
+    @property
+    def precio_visible(self):
+        """El precio solo aparece en el sitio si está capturado y activado."""
+        return self.precio is not None and self.mostrar_precio
+
+    @property
+    def precio_formateado(self):
+        """Precio listo para pantalla, ej. $1,250.00"""
+        if self.precio is None:
+            return ''
+        return f'${self.precio:,.2f}'

@@ -1,0 +1,166 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<style>
+  .tds-precios { max-width: 1100px; }
+  .tds-precios h1 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .tds-precios .tds-intro { font-size: 0.85rem; opacity: 0.75; margin-bottom: 1.5rem; max-width: 70ch; }
+  .tds-card {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    background: #fff;
+  }
+  .dark .tds-card { background: rgb(24 24 27); border-color: rgba(255, 255, 255, 0.14); }
+  .tds-resumen { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+  .tds-resumen .tds-card { flex: 1 1 180px; margin-bottom: 0; }
+  .tds-resumen__num { font-size: 1.6rem; font-weight: 600; line-height: 1.1; }
+  .tds-resumen__lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.7; }
+  .tds-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; flex-wrap: wrap;
+  }
+  .tds-row__info { min-width: 220px; }
+  .tds-row__title { font-weight: 600; font-size: 0.95rem; }
+  .tds-row__meta { font-size: 0.78rem; opacity: 0.7; }
+  .tds-subrow {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.6rem 0 0.6rem 1rem;
+    margin-top: 0.6rem;
+  }
+  .dark .tds-subrow { border-top-color: rgba(255, 255, 255, 0.1); }
+  .tds-subrow:first-of-type { margin-top: 1rem; }
+  .tds-acciones { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .tds-btn {
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .tds-btn--on { background: #15803d; color: #fff; }
+  .tds-btn--on:hover { background: #166534; }
+  .tds-btn--off { background: transparent; color: #b91c1c; border-color: #b91c1c; }
+  .tds-btn--off:hover { background: #b91c1c; color: #fff; }
+  .dark .tds-btn--off { color: #f87171; border-color: #f87171; }
+  .dark .tds-btn--off:hover { background: #b91c1c; color: #fff; }
+  .tds-btn--sm { padding: 0.25rem 0.7rem; font-size: 0.75rem; }
+  .tds-vacio { font-size: 0.78rem; opacity: 0.6; }
+</style>
+
+<div class="tds-precios">
+  <h1>Control de precios</h1>
+  <p class="tds-intro">
+    Activa o desactiva la visibilidad de los precios en el sitio web: en todo el catálogo,
+    por categoría o por subcategoría. Al desactivar, el precio capturado <strong>se conserva</strong>
+    en el sistema, simplemente deja de mostrarse a los visitantes. Los productos sin precio
+    capturado nunca muestran nada.
+  </p>
+
+  <div class="tds-resumen">
+    <div class="tds-card">
+      <div class="tds-resumen__num">{{ resumen.total }}</div>
+      <div class="tds-resumen__lbl">Productos</div>
+    </div>
+    <div class="tds-card">
+      <div class="tds-resumen__num">{{ resumen.con_precio }}</div>
+      <div class="tds-resumen__lbl">Con precio capturado</div>
+    </div>
+    <div class="tds-card">
+      <div class="tds-resumen__num">{{ resumen.visibles }}</div>
+      <div class="tds-resumen__lbl">Mostrando precio</div>
+    </div>
+  </div>
+
+  <div class="tds-card">
+    <div class="tds-row">
+      <div class="tds-row__info">
+        <div class="tds-row__title">Todo el catálogo</div>
+        <div class="tds-row__meta">
+          {{ resumen.visibles }} de {{ resumen.con_precio }} producto{{ resumen.con_precio|pluralize }}
+          con precio están mostrándolo.
+        </div>
+      </div>
+      <div class="tds-acciones">
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="alcance" value="global">
+          <button type="submit" name="accion" value="activar" class="tds-btn tds-btn--on"
+                  onclick="return confirm('¿Activar el precio en TODOS los productos del catálogo?');">
+            Activar todos
+          </button>
+        </form>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="alcance" value="global">
+          <button type="submit" name="accion" value="desactivar" class="tds-btn tds-btn--off"
+                  onclick="return confirm('¿Ocultar el precio en TODOS los productos del catálogo? Los precios se conservan guardados.');">
+            Desactivar todos
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% for seccion in secciones %}
+  <div class="tds-card">
+    <div class="tds-row">
+      <div class="tds-row__info">
+        <div class="tds-row__title">{{ seccion.categoria.nombre }}</div>
+        <div class="tds-row__meta">
+          {{ seccion.categoria.total }} producto{{ seccion.categoria.total|pluralize }} ·
+          {{ seccion.categoria.con_precio }} con precio ·
+          {{ seccion.categoria.visibles }} visible{{ seccion.categoria.visibles|pluralize }}
+        </div>
+      </div>
+      <div class="tds-acciones">
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="alcance" value="categoria">
+          <input type="hidden" name="objeto_id" value="{{ seccion.categoria.pk }}">
+          <button type="submit" name="accion" value="activar" class="tds-btn tds-btn--on">Activar</button>
+        </form>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="alcance" value="categoria">
+          <input type="hidden" name="objeto_id" value="{{ seccion.categoria.pk }}">
+          <button type="submit" name="accion" value="desactivar" class="tds-btn tds-btn--off">Desactivar</button>
+        </form>
+      </div>
+    </div>
+
+    {% for sub in seccion.subcategorias %}
+    <div class="tds-subrow tds-row">
+      <div class="tds-row__info">
+        <div class="tds-row__title" style="font-weight:500;">{{ sub.nombre }}</div>
+        <div class="tds-row__meta">
+          {{ sub.total }} producto{{ sub.total|pluralize }} ·
+          {{ sub.con_precio }} con precio ·
+          {{ sub.visibles }} visible{{ sub.visibles|pluralize }}
+        </div>
+      </div>
+      <div class="tds-acciones">
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="alcance" value="subcategoria">
+          <input type="hidden" name="objeto_id" value="{{ sub.pk }}">
+          <button type="submit" name="accion" value="activar" class="tds-btn tds-btn--on tds-btn--sm">Activar</button>
+        </form>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="alcance" value="subcategoria">
+          <input type="hidden" name="objeto_id" value="{{ sub.pk }}">
+          <button type="submit" name="accion" value="desactivar" class="tds-btn tds-btn--off tds-btn--sm">Desactivar</button>
+        </form>
+      </div>
+    </div>
+    {% empty %}
+    <p class="tds-vacio" style="margin-top:0.75rem;">Esta categoría no tiene subcategorías.</p>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
